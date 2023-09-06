@@ -140,7 +140,7 @@ def main():
     if output_dir.exists():
         raise IOError("Directory {output_dir} already exists!")
 
-    output_dir.mkdir()
+    output_dir.mkdir(parents=True)
     gammapy_dir = output_dir / "analysis-baseline-powerlaw"
     gammapy_dir.mkdir()
 
@@ -170,12 +170,10 @@ def main():
         json.dump(agn_config, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
     with open(output_dir / "data_selection.json", 'w', encoding='utf-8') as f:
-        pprint(replace(selection_skeleton))
         selection_config = json.loads(replace(selection_skeleton))
         json.dump(selection_config, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
     with open(output_dir / "irf_tool_config.json", 'w', encoding='utf-8') as f:
-        pprint(replace(irf_skeleton))
         irf_config = json.loads(replace(irf_skeleton))
         json.dump(irf_config, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
