@@ -61,24 +61,35 @@ light_curve:
 """
 
 
-model_skeleton = """
+pl_model_skeleton = """
 components:
 - name: <<source_name>>
-  type: SkyModel
-  spectral:
-    type: PowerLawSpectralModel
-    parameters:
-    - name: amplitude
-      value: 6.0e-11
-      unit: cm-2 s-1 TeV-1
-      min: 0
-    - name: index
-      value: 2.2
-      unit: ''
-    - name: reference
-      value: 100
-      unit: GeV
-      frozen: true
+    type: SkyModel
+    spectral:
+        type: CompoundSpectralModel
+        model1:
+            type: PowerLawSpectralModel
+            parameters:
+            - name: amplitude
+              value: 6.0e-11
+              unit: cm-2 s-1 TeV-1
+              min: 0
+            - name: index
+              value: 2.2
+              unit: ''
+            - name: reference
+              value: 100
+              unit: GeV
+              frozen: true
+        model2:
+            type: EBLAbsorptionNormSpectralModel
+            parameters:
+            -   name: alpha_norm
+                value: 1.0
+            -   name: redshift
+                value: 0.117
+            filename: ebl_dominguez11.fits.gz
+        operator: mul
 """
 
 selection_skeleton = """
