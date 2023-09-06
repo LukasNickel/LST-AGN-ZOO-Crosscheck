@@ -136,7 +136,7 @@ skeletons = [snakemake_skeleton, selection_skeleton, irf_skeleton, gammapy_skele
 def main():
     log.level = logging.INFO
     source_name = input("Input source name: ")
-    output_dir = Path(source_name)
+    output_dir = Path("configs") / source_name
     if output_dir.exists():
         raise IOError("Directory {output_dir} already exists!")
 
