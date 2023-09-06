@@ -87,10 +87,80 @@ components:
             -   name: alpha_norm
                 value: 1.0
             -   name: redshift
-                value: 0.117
+                value: <<redshift>>
             filename: ebl_dominguez11.fits.gz
         operator: mul
 """
+
+ecpl_model_skeleton = """
+components:
+- name: <<source_name>>
+    type: SkyModel
+    spectral:
+        type: CompoundSpectralModel
+        model1:
+            type: ExponentialCutoffPowerLawSpectralModel
+            parameters:
+            - name: amplitude
+              value: 6.0e-11
+              unit: cm-2 s-1 TeV-1
+              min: 0
+            - name: index
+              value: 2.2
+              unit: ''
+            - name: lambda_
+              value: 0.1
+              unit: TeV-1
+            - name: reference
+              value: 100
+              unit: GeV
+              frozen: true
+        model2:
+            type: EBLAbsorptionNormSpectralModel
+            parameters:
+            -   name: alpha_norm
+                value: 1.0
+            -   name: redshift
+                value: <<redshift>>
+            filename: ebl_dominguez11.fits.gz
+        operator: mul
+"""
+
+
+lp_model_skeleton = """
+components:
+- name: <<source_name>>
+    type: SkyModel
+    spectral:
+        type: CompoundSpectralModel
+        model1:
+            type: LogParabolaSpectralModel
+            parameters:
+            - name: amplitude
+              value: 6.0e-11
+              unit: cm-2 s-1 TeV-1
+              min: 0
+            - name: alpha
+              value: 2.2
+              unit: ''
+            - name: beta
+              value: 0.5
+              unit: ''
+            - name: reference
+              value: 100
+              unit: GeV
+              frozen: true
+        model2:
+            type: EBLAbsorptionNormSpectralModel
+            parameters:
+            -   name: alpha_norm
+                value: 1.0
+            -   name: redshift
+                value: <<redshift>>
+            filename: ebl_dominguez11.fits.gz
+        operator: mul
+"""
+
 
 selection_skeleton = """
 {
@@ -152,9 +222,6 @@ def main():
         raise IOError("Directory {output_dir} already exists!")
 
     output_dir.mkdir(parents=True)
-    gammapy_dir = output_dir / "analysis-baseline-powerlaw"
-    gammapy_dir.mkdir()
-
 
     # These will probably always be the same?
     mc_production = "20230127_v0.9.12_base_prod_az_tel"
@@ -188,13 +255,19 @@ def main():
         irf_config = json.loads(replace(irf_skeleton))
         json.dump(irf_config, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
-    with open(gammapy_dir / "analysis.yaml", 'w', encoding='utf-8') as f:
-        analysis_config = yaml.safe_load(replace(gammapy_skeleton))
-        yaml.dump(analysis_config, f)
+    names = ("analysis-baseline-powerlaw", "analysis-baseline-ecpl", "analysis-baseline-logparabola")
+    models = ("pl_model_skeleton", "ecpl_model_skeleton", "lp_model_skeleton")
+    for name, model in zip(names, models):
+        gammapy_dir = output_dir / name
+        gammapy_dir.mkdir()
+        log.info(f"Write configs to {name}")
+        with open(gammapy_dir / "analysis.yaml", 'w', encoding='utf-8') as f:
+            analysis_config = yaml.safe_load(replace(gammapy_skeleton))
+            yaml.dump(analysis_config, f)
 
-    with open(gammapy_dir / "models.yaml", 'w', encoding='utf-8') as f:
-        model_config = yaml.safe_load(replace(model_skeleton))
-        yaml.dump(model_config, f)
+        with open(gammapy_dir / "models.yaml", 'w', encoding='utf-8') as f:
+            model_config = yaml.safe_load(replace(model))
+            yaml.dump(model_config, f)
 
     log.info(f"Wrote basic workflow configs to {output_dir}")
     log.info("Make sure to check everything especially the data selection!")
