@@ -1,0 +1,62 @@
+datasets:
+  background:
+    method: reflected
+    parameters:
+      min_distance_input: 1 deg
+  containment_correction: false
+  geom:
+    axes:
+      energy:
+        max: 10 TeV
+        min: 20 GeV
+        nbins: 40
+      energy_true:
+        max: 10 TeV
+        min: 20 GeV
+        nbins: 20
+    selection:
+      offset_max: 2.5 deg
+    wcs:
+      binsize: 0.02 deg
+      binsize_irf: 0.2 deg
+      skydir:
+        frame: icrs
+        lat: 38.209 deg
+        lon: 166.114 deg
+      width:
+        height: 2.0 deg
+        width: 2.0 deg
+  on_region:
+    frame: icrs
+    lat: 38.209 deg
+    lon: 166.114 deg
+    radius: 0.2 deg
+  stack: true
+  type: 1d
+fit:
+  fit_range:
+    max: 10 TeV
+    min: 20 GeV
+flux_points:
+  energy:
+    max: 10 TeV
+    min: 20 GeV
+    nbins: 20
+  source: Mrk-421
+general:
+  log:
+    level: info
+light_curve:
+  energy_edges:
+    max: 10 TeV
+    min: 100 GeV
+    nbins: 1
+  source: Mrk-421
+observations:
+  datastore: build/Mrk-421/dl3
+  obs_time:
+    start: '2020-05-01'
+    stop: '2022-07-01'
+  required_irf:
+  - aeff
+  - edisp

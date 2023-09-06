@@ -1,0 +1,29 @@
+{
+    "source": "Mrk-421",
+    "source_ra_deg": 166.114,
+    "source_dec_deg": 38.209,
+    "pedestal": {
+        "ul": 1.9,
+        "ll": null,
+        "sigma": null
+    },
+    "cosmics": {
+        "ul": 7800,
+        "ll": 2600,
+        "sigma": null
+    },
+    "cosmics_10": {
+        "ul": null,
+        "ll": null,
+        "sigma": null
+    },
+    "cosmics_30": {
+        "ul": null,
+        "ll": null,
+        "sigma": null
+    },
+    "time_start": "2020-05-01",
+    "time_stop": "2022-07-01",
+    "always_include": [],
+    "never_include": []
+}
