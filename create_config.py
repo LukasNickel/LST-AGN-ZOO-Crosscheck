@@ -169,7 +169,7 @@ def main():
         agn_config = json.loads(replace(snakemake_skeleton))
         json.dump(agn_config, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
-    with open(output_dir / "data_selection.json", 'w', encoding='utf-8') as f:
+    with open(output_dir / "data-selection.json", 'w', encoding='utf-8') as f:
         selection_config = json.loads(replace(selection_skeleton))
         json.dump(selection_config, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
