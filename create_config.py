@@ -2,6 +2,7 @@ import yaml
 import json
 from pathlib import Path
 import logging
+import shutil
 
 
 log = logging.getLogger(__name__)
@@ -219,6 +220,7 @@ def main():
         raise IOError("Directory {output_dir} already exists!")
 
     output_dir.mkdir(parents=True)
+    shutil.copyfile("matplotlibrc", output_dir / "matplotlibrc")
 
     # These will probably always be the same?
     mc_production = "20230127_v0.9.12_base_prod_az_tel"
