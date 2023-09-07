@@ -1,6 +1,5 @@
 import yaml
 import json
-from pprint import pprint
 from pathlib import Path
 import logging
 
@@ -265,7 +264,6 @@ def main():
 
         with open(gammapy_dir / "models.yaml", 'w', encoding='utf-8') as f:
             model_config = yaml.safe_load(replace(model))
-            pprint(model_config)
             yaml.dump(model_config, f)
 
     log.info(f"Wrote basic workflow configs to {output_dir}")
