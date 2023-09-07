@@ -212,8 +212,6 @@ snakemake_skeleton = """
 }
 """
 
-skeletons = [snakemake_skeleton, selection_skeleton, irf_skeleton, gammapy_skeleton, model_skeleton]
-
 def main():
     log.level = logging.INFO
     source_name = input("Input source name: ")
