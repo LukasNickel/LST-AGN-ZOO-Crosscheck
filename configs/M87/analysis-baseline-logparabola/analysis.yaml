@@ -21,14 +21,14 @@ datasets:
       binsize_irf: 0.2 deg
       skydir:
         frame: icrs
-        lat: 12.3911232 deg
+        lat: 12.39112329 deg
         lon: 187.70593076 deg
       width:
         height: 2.0 deg
         width: 2.0 deg
   on_region:
     frame: icrs
-    lat: 12.3911232 deg
+    lat: 12.39112329 deg
     lon: 187.70593076 deg
     radius: 0.2 deg
   stack: true
