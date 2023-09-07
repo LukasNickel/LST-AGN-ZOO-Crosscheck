@@ -1,7 +1,7 @@
 {
     "source": "M87",
     "source_ra_deg": 187.70593076,
-    "source_dec_deg": 12.39112329,
+    "source_dec_deg": 12.3911232,
     "pedestal": {
         "ul": 1.9,
         "ll": null,
