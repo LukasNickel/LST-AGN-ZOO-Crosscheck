@@ -64,101 +64,101 @@ light_curve:
 pl_model_skeleton = """
 components:
 - name: <<source_name>>
-    type: SkyModel
-    spectral:
-        type: CompoundSpectralModel
-        model1:
-            type: PowerLawSpectralModel
-            parameters:
-            - name: amplitude
-              value: 6.0e-11
-              unit: cm-2 s-1 TeV-1
-              min: 0
-            - name: index
-              value: 2.2
-              unit: ''
-            - name: reference
-              value: 100
-              unit: GeV
-              frozen: true
-        model2:
-            type: EBLAbsorptionNormSpectralModel
-            parameters:
-            -   name: alpha_norm
-                value: 1.0
-            -   name: redshift
-                value: <<redshift>>
-            filename: ebl_dominguez11.fits.gz
-        operator: mul
+  type: SkyModel
+  spectral:
+      type: CompoundSpectralModel
+      model1:
+          type: PowerLawSpectralModel
+          parameters:
+          - name: amplitude
+            value: 6.0e-11
+            unit: cm-2 s-1 TeV-1
+            min: 0
+          - name: index
+            value: 2.2
+            unit: ''
+          - name: reference
+            value: 100
+            unit: GeV
+            frozen: true
+      model2:
+          type: EBLAbsorptionNormSpectralModel
+          parameters:
+          -   name: alpha_norm
+              value: 1.0
+          -   name: redshift
+              value: <<redshift>>
+          filename: ebl_dominguez11.fits.gz
+      operator: mul
 """
 
 ecpl_model_skeleton = """
 components:
 - name: <<source_name>>
-    type: SkyModel
-    spectral:
-        type: CompoundSpectralModel
-        model1:
-            type: ExponentialCutoffPowerLawSpectralModel
-            parameters:
-            - name: amplitude
-              value: 6.0e-11
-              unit: cm-2 s-1 TeV-1
-              min: 0
-            - name: index
-              value: 2.2
-              unit: ''
-            - name: lambda_
-              value: 0.1
-              unit: TeV-1
-            - name: reference
-              value: 100
-              unit: GeV
-              frozen: true
-        model2:
-            type: EBLAbsorptionNormSpectralModel
-            parameters:
-            -   name: alpha_norm
-                value: 1.0
-            -   name: redshift
-                value: <<redshift>>
-            filename: ebl_dominguez11.fits.gz
-        operator: mul
+  type: SkyModel
+  spectral:
+      type: CompoundSpectralModel
+      model1:
+          type: ExponentialCutoffPowerLawSpectralModel
+          parameters:
+          - name: amplitude
+            value: 6.0e-11
+            unit: cm-2 s-1 TeV-1
+            min: 0
+          - name: index
+            value: 2.2
+            unit: ''
+          - name: lambda_
+            value: 0.1
+            unit: TeV-1
+          - name: reference
+            value: 100
+            unit: GeV
+            frozen: true
+      model2:
+          type: EBLAbsorptionNormSpectralModel
+          parameters:
+          -   name: alpha_norm
+              value: 1.0
+          -   name: redshift
+              value: <<redshift>>
+          filename: ebl_dominguez11.fits.gz
+      operator: mul
 """
 
 
 lp_model_skeleton = """
 components:
 - name: <<source_name>>
-    type: SkyModel
-    spectral:
-        type: CompoundSpectralModel
-        model1:
-            type: LogParabolaSpectralModel
-            parameters:
-            - name: amplitude
-              value: 6.0e-11
-              unit: cm-2 s-1 TeV-1
-              min: 0
-            - name: alpha
-              value: 2.2
-              unit: ''
-            - name: beta
-              value: 0.5
-              unit: ''
-            - name: reference
-              value: 100
-              unit: GeV
-              frozen: true
-        model2:
-            type: EBLAbsorptionNormSpectralModel
-            parameters:
-            -   name: alpha_norm
-                value: 1.0
-            -   name: redshift
-                value: <<redshift>>
-            filename: ebl_dominguez11.fits.gz
-        operator: mul
+  type: SkyModel
+  spectral:
+      type: CompoundSpectralModel
+      model1:
+          type: LogParabolaSpectralModel
+          parameters:
+          - name: amplitude
+            value: 6.0e-11
+            unit: cm-2 s-1 TeV-1
+            min: 0
+          - name: alpha
+            value: 2.2
+            unit: ''
+          - name: beta
+            value: 0.5
+            unit: ''
+          - name: reference
+            value: 100
+            unit: GeV
+            frozen: true
+      model2:
+          type: EBLAbsorptionNormSpectralModel
+          parameters:
+          -   name: alpha_norm
+              value: 1.0
+          -   name: redshift
+              value: <<redshift>>
+          filename: ebl_dominguez11.fits.gz
+      operator: mul
 """
 
 
@@ -213,7 +213,7 @@ snakemake_skeleton = """
 """
 
 def main():
-    log.level = logging.INFO
+    logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.DEBUG)
     source_name = input("Input source name: ")
     output_dir = Path("configs") / source_name
     if output_dir.exists():
@@ -254,7 +254,7 @@ def main():
         json.dump(irf_config, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
     names = ("analysis-baseline-powerlaw", "analysis-baseline-ecpl", "analysis-baseline-logparabola")
-    models = ("pl_model_skeleton", "ecpl_model_skeleton", "lp_model_skeleton")
+    models = (pl_model_skeleton, ecpl_model_skeleton, lp_model_skeleton)
     for name, model in zip(names, models):
         gammapy_dir = output_dir / name
         gammapy_dir.mkdir()
@@ -265,6 +265,7 @@ def main():
 
         with open(gammapy_dir / "models.yaml", 'w', encoding='utf-8') as f:
             model_config = yaml.safe_load(replace(model))
+            pprint(model_config)
             yaml.dump(model_config, f)
 
     log.info(f"Wrote basic workflow configs to {output_dir}")
