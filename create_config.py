@@ -82,7 +82,7 @@ components:
             unit: GeV
             frozen: true
       model2:
-          type: EBLAbsorptionNormSpectralModel
+          type: EBLAbsorptionSpectralModel
           parameters:
           -   name: alpha_norm
               value: 1.0
@@ -229,6 +229,7 @@ def main():
 
     source_ra = input("Input source right ascension in units of deg (position.ra in icrs): ")
     source_dec = input("Input source declination in units of deg (position.dec in icrs): ")
+    redshift = input(f"Redshift? ")
     mc_dec_line = input(f"Which mc dec line (of prod {mc_production}) should be used? ")
 
     def replace(s):
@@ -239,6 +240,7 @@ def main():
         s = s.replace("<<source_dec>>", source_dec)
         s = s.replace("<<data_start>>", data_start)
         s = s.replace("<<data_end>>", data_end)
+        s = s.replace("<<redshift>>", redshift)
         return s
 
 
