@@ -13,17 +13,17 @@
         "sigma": null
     },
     "cosmics_10": {
-        "ul": null,
+        "ul": 17700,
         "ll": null,
         "sigma": null
     },
     "cosmics_30": {
-        "ul": null,
+        "ul": 1600,
         "ll": null,
         "sigma": null
     },
-    "time_start": "2020-05-01",
-    "time_stop": "2022-07-01",
+    "time_start": "2020-07-09",
+    "time_stop": "2022-05-07",
     "always_include": [],
     "never_include": []
 }

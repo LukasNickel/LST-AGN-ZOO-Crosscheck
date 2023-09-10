@@ -13,12 +13,12 @@
         "sigma": null
     },
     "cosmics_10": {
-        "ul": null,
+        "ul": 17700,
         "ll": null,
         "sigma": null
     },
     "cosmics_30": {
-        "ul": null,
+        "ul": 1600,
         "ll": null,
         "sigma": null
     },
