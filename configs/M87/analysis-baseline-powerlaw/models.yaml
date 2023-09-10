@@ -21,7 +21,7 @@ components:
       - name: alpha_norm
         value: 1.0
       - name: redshift
-        value: <<redshift>>
+        value: 0.0042
       type: EBLAbsorptionNormSpectralModel
     operator: mul
     type: CompoundSpectralModel
