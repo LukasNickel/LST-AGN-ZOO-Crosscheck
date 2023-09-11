@@ -25,5 +25,5 @@
     "time_start": "2020-05-01",
     "time_stop": "2022-07-01",
     "always_include": [],
-    "never_include": []
+    "never_include": [3739, 3746, 3747, 4396, 4397, 4398]
 }
