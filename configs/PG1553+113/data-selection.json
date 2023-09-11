@@ -3,13 +3,13 @@
     "source_ra_deg": 238.92934976,
     "source_dec_deg": 11.19010155,
     "pedestal": {
-        "ul": 1.9,
+        "ul": 2.0,
         "ll": null,
         "sigma": null
     },
     "cosmics": {
-        "ul": 7800,
-        "ll": 2600,
+        "ul": 30000,
+        "ll": 2000,
         "sigma": null
     },
     "cosmics_10": {
