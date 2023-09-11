@@ -22,7 +22,7 @@ components:
         value: 1.0
       - name: redshift
         value: 0.048
-      type: EBLAbsorptionSpectralModel
+      type: EBLAbsorptionNormSpectralModel
     operator: mul
     type: CompoundSpectralModel
   type: SkyModel

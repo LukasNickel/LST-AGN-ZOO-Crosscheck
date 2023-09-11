@@ -17,7 +17,7 @@ components:
         name: reference
         unit: GeV
         value: 100
-      type: ExponentialCutoffPowerLawSpectralModel
+      type: ExpCutoffPowerLawSpectralModel
     model2:
       filename: ebl_dominguez11.fits.gz
       parameters:
