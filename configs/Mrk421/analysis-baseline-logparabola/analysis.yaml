@@ -7,12 +7,12 @@ datasets:
   geom:
     axes:
       energy:
-        max: 10 TeV
-        min: 20 GeV
-        nbins: 40
+        max: 50 TeV
+        min: 5 GeV
+        nbins: 20
       energy_true:
-        max: 10 TeV
-        min: 20 GeV
+        max: 50 TeV
+        min: 5 GeV
         nbins: 20
     selection:
       offset_max: 2.5 deg
@@ -35,20 +35,20 @@ datasets:
   type: 1d
 fit:
   fit_range:
-    max: 10 TeV
-    min: 20 GeV
+    max: 50 TeV
+    min: 50 GeV
 flux_points:
   energy:
-    max: 10 TeV
-    min: 20 GeV
-    nbins: 20
+    max: 50 TeV
+    min: 50 GeV
+    nbins: 15
   source: Mrk421
 general:
   log:
     level: info
 light_curve:
   energy_edges:
-    max: 10 TeV
+    max: 50 TeV
     min: 100 GeV
     nbins: 1
   source: Mrk421

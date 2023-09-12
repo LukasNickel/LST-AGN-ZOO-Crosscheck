@@ -34,12 +34,12 @@ datasets:
     selection: { offset_max: 2.5 deg }
     axes:
       energy:
-        min: 20 GeV
-        max: 10 TeV
-        nbins: 40
+        min: 5 GeV
+        max: 50 TeV
+        nbins: 20
       energy_true:
-        min: 20 GeV
-        max: 10 TeV
+        min: 5 GeV
+        max: 50 TeV
         nbins: 20
   background:
     method: "reflected"
@@ -49,14 +49,14 @@ datasets:
   containment_correction: false
 
 fit:
-  fit_range: { min: 20 GeV, max: 10 TeV }
+  fit_range: { min: 50 GeV, max: 50 TeV }
 
 flux_points:
-  energy: { min: 20 GeV, max: 10 TeV, nbins: 20 }
+  energy: { min: 50 GeV, max: 50 TeV, nbins: 15 }
   source: <<source_name>>
 
 light_curve:
-  energy_edges: { min: 100 GeV, max: 10 TeV, nbins: 1 }
+  energy_edges: { min: 100 GeV, max: 50 TeV, nbins: 1 }
   source: <<source_name>>
 """
 
