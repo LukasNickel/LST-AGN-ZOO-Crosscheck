@@ -82,7 +82,7 @@ components:
             unit: GeV
             frozen: true
       model2:
-          type: EBLAbsorptionSpectralModel
+          type: EBLAbsorptionNormSpectralModel
           parameters:
           -   name: alpha_norm
               value: 1.0
@@ -99,7 +99,7 @@ components:
   spectral:
       type: CompoundSpectralModel
       model1:
-          type: ExponentialCutoffPowerLawSpectralModel
+          type: ExpCutoffPowerLawSpectralModel
           parameters:
           - name: amplitude
             value: 6.0e-11
